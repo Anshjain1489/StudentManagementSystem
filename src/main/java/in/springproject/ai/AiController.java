@@ -1,4 +1,4 @@
-package in.springproject.ai;
+ackage in.springproject.ai;
 
 import in.springproject.util.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;

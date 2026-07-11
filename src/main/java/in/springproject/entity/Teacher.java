@@ -1,4 +1,4 @@
-package in.springproject.entity;
+ackage in.springproject.entity;
 
 import in.springproject.entity.enums.Gender;
 import jakarta.persistence.*;

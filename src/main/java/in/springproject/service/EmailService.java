@@ -1,4 +1,4 @@
-﻿package in.springproject.service;
+ackage in.springproject.service;
 
 /**
  * Service interface for sending application emails.

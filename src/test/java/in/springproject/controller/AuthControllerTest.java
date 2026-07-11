@@ -1,4 +1,4 @@
-package in.springproject.controller;
+ackage in.springproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.springproject.dto.auth.JwtResponse;

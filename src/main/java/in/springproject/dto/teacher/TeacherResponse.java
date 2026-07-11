@@ -1,4 +1,4 @@
-package in.springproject.dto.teacher;
+ackage in.springproject.dto.teacher;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import in.springproject.entity.enums.Gender;

@@ -1,4 +1,4 @@
-package in.springproject.util;
+ackage in.springproject.util;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;

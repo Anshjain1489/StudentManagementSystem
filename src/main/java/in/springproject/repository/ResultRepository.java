@@ -1,4 +1,4 @@
-package in.springproject.repository;
+ackage in.springproject.repository;
 
 import in.springproject.entity.Result;
 import org.springframework.data.jpa.repository.JpaRepository;

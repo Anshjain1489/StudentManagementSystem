@@ -1,4 +1,4 @@
-package in.springproject.dto.attendance;
+ackage in.springproject.dto.attendance;
 
 import in.springproject.entity.enums.AttendanceStatus;
 import jakarta.validation.constraints.NotNull;

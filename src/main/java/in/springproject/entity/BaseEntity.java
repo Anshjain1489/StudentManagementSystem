@@ -1,4 +1,4 @@
-package in.springproject.entity;
+ackage in.springproject.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

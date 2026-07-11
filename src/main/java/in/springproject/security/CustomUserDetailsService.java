@@ -1,4 +1,4 @@
-package in.springproject.security;
+ackage in.springproject.security;
 
 import in.springproject.entity.User;
 import in.springproject.exception.ResourceNotFoundException;

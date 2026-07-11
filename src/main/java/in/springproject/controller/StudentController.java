@@ -1,4 +1,4 @@
-package in.springproject.controller;
+ackage in.springproject.controller;
 
 import in.springproject.dto.student.*;
 import in.springproject.service.StudentService;

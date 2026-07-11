@@ -1,4 +1,4 @@
-package in.springproject.ai;
+ackage in.springproject.ai;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

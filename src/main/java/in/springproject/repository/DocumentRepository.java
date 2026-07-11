@@ -1,4 +1,4 @@
-package in.springproject.repository;
+ackage in.springproject.repository;
 
 import in.springproject.entity.Document;
 import in.springproject.entity.enums.DocumentType;

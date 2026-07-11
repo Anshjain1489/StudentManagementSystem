@@ -1,4 +1,4 @@
-package in.springproject.dto.timetable;
+ackage in.springproject.dto.timetable;
 
 import in.springproject.entity.enums.DayOfWeek;
 import lombok.AllArgsConstructor;

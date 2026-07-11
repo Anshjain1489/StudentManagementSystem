@@ -1,4 +1,4 @@
-package in.springproject.util;
+ackage in.springproject.util;
 
 /**
  * Application-wide constants used across controllers, services, and utilities.

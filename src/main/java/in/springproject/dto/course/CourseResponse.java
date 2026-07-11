@@ -1,4 +1,4 @@
-package in.springproject.dto.course;
+ackage in.springproject.dto.course;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

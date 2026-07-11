@@ -1,4 +1,4 @@
-package in.springproject.util;
+ackage in.springproject.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

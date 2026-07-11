@@ -1,4 +1,4 @@
-package in.springproject.dto.notification;
+ackage in.springproject.dto.notification;
 
 import in.springproject.entity.enums.NotificationType;
 import lombok.AllArgsConstructor;

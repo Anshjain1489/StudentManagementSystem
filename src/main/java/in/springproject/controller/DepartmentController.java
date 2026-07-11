@@ -1,4 +1,4 @@
-package in.springproject.controller;
+ackage in.springproject.controller;
 
 import in.springproject.dto.department.*;
 import in.springproject.service.DepartmentService;

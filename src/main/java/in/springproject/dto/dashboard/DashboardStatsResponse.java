@@ -1,4 +1,4 @@
-package in.springproject.dto.dashboard;
+ackage in.springproject.dto.dashboard;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
