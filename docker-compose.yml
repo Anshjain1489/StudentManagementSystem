@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: sms-mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sms_db
+      MYSQL_USER: sms_user
+      MYSQL_PASSWORD: sms_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - sms-network
+
+  backend-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sms-backend-api
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/sms_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: sms_user
+      SPRING_DATASOURCE_PASSWORD: sms_password
+      APP_JWT_SECRET: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      APP_AI_OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+    depends_on:
+      - mysql-db
+    networks:
+      - sms-network
+
+volumes:
+  mysql-data:
+
+networks:
+  sms-network:
+    driver: bridge
