@@ -1,5 +1,4 @@
-# Ensure files are checked out with LF on Unix and CRLF on Windows if desired, and prevent BOMs
-*.java text eol=lf
+*.java text working-tree-encoding=UTF-8
 *.xml text
 *.properties text
 *.yml text
