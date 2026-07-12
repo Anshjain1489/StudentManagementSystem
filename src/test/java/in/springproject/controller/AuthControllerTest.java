@@ -3,6 +3,7 @@ package in.springproject.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.springproject.dto.auth.JwtResponse;
 import in.springproject.dto.auth.LoginRequest;
+import in.springproject.security.JwtTokenProvider;
 import in.springproject.service.AuthService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -21,13 +23,25 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Integration tests for AuthController using MockMvc.
+ * JwtTokenProvider and UserDetailsService are mocked because @WebMvcTest
+ * loads the security filter chain (including JwtAuthenticationFilter) which
+ * depends on those beans, but does NOT load the full application context.
+ */
 @WebMvcTest(AuthController.class)
 @DisplayName("AuthController Integration Tests")
 class AuthControllerTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
+
+    // Service under test
     @MockBean private AuthService authService;
+
+    // Required by JwtAuthenticationFilter in the security filter chain
+    @MockBean private JwtTokenProvider jwtTokenProvider;
+    @MockBean private UserDetailsService userDetailsService;
 
     @Test
     @DisplayName("POST /api/v1/auth/login - Should return JWT on valid credentials")

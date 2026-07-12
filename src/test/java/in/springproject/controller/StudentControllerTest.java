@@ -5,6 +5,7 @@ import in.springproject.dto.student.StudentRequest;
 import in.springproject.dto.student.StudentResponse;
 import in.springproject.entity.enums.Gender;
 import in.springproject.exception.ResourceNotFoundException;
+import in.springproject.security.JwtTokenProvider;
 import in.springproject.service.StudentService;
 import in.springproject.util.PageResponse;
 import org.junit.jupiter.api.DisplayName;
@@ -14,10 +15,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.*;
@@ -26,13 +27,25 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Integration tests for StudentController using MockMvc.
+ * JwtTokenProvider and UserDetailsService are mocked because @WebMvcTest
+ * loads the security filter chain (including JwtAuthenticationFilter) which
+ * depends on those beans, but does NOT load the full application context.
+ */
 @WebMvcTest(StudentController.class)
 @DisplayName("StudentController Integration Tests")
 class StudentControllerTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
+
+    // Service under test
     @MockBean private StudentService studentService;
+
+    // Required by JwtAuthenticationFilter in the security filter chain
+    @MockBean private JwtTokenProvider jwtTokenProvider;
+    @MockBean private UserDetailsService userDetailsService;
 
     private StudentResponse buildStudentResponse() {
         return StudentResponse.builder()
