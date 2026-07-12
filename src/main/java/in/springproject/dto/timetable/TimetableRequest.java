@@ -1,4 +1,4 @@
-ackage in.springproject.dto.timetable;
+﻿package in.springproject.dto.timetable;
 
 import in.springproject.entity.enums.DayOfWeek;
 import jakarta.validation.constraints.NotNull;

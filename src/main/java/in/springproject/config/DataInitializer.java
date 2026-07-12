@@ -1,4 +1,4 @@
-ackage in.springproject.config;
+﻿package in.springproject.config;
 
 import in.springproject.entity.Role;
 import in.springproject.entity.User;

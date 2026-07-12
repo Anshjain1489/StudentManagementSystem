@@ -1,4 +1,4 @@
-ackage in.springproject.dto.semester;
+﻿package in.springproject.dto.semester;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

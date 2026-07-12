@@ -1,4 +1,4 @@
-ackage in.springproject.config;
+﻿package in.springproject.config;
 
 import in.springproject.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;

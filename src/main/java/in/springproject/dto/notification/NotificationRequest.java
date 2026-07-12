@@ -1,4 +1,4 @@
-ackage in.springproject.dto.notification;
+﻿package in.springproject.dto.notification;
 
 import in.springproject.entity.enums.NotificationType;
 import jakarta.validation.constraints.NotBlank;

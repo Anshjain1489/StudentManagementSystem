@@ -1,3 +1,3 @@
-ackage in.springproject.entity.enums;
+﻿package in.springproject.entity.enums;
 
 public enum DayOfWeek { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY }

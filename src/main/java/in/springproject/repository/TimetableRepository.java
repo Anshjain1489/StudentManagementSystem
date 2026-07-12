@@ -1,4 +1,4 @@
-ackage in.springproject.repository;
+﻿package in.springproject.repository;
 
 import in.springproject.entity.Timetable;
 import in.springproject.entity.enums.DayOfWeek;

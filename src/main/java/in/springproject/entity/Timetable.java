@@ -1,4 +1,4 @@
-ackage in.springproject.entity;
+﻿package in.springproject.entity;
 
 import in.springproject.entity.enums.DayOfWeek;
 import jakarta.persistence.*;
