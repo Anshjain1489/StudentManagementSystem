@@ -1,4 +1,4 @@
-﻿package in.springproject.exception;
+package in.springproject.exception;
 
 import in.springproject.util.ApiResponse;
 import lombok.extern.slf4j.Slf4j;

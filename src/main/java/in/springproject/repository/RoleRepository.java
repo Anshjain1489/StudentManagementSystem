@@ -1,4 +1,4 @@
-﻿package in.springproject.repository;
+package in.springproject.repository;
 
 import in.springproject.entity.Role;
 import in.springproject.entity.enums.RoleName;

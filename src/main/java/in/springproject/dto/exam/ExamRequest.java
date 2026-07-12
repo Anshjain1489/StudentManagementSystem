@@ -1,4 +1,4 @@
-﻿package in.springproject.dto.exam;
+package in.springproject.dto.exam;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

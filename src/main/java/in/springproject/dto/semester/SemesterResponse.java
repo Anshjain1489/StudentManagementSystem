@@ -1,4 +1,4 @@
-﻿package in.springproject.dto.semester;
+package in.springproject.dto.semester;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

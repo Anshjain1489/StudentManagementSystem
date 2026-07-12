@@ -1,4 +1,4 @@
-﻿package in.springproject.dto.fees;
+package in.springproject.dto.fees;
 
 import in.springproject.entity.enums.FeeType;
 import jakarta.validation.constraints.*;

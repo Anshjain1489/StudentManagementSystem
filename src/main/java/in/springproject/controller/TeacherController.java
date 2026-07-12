@@ -1,4 +1,4 @@
-﻿package in.springproject.controller;
+package in.springproject.controller;
 
 import in.springproject.dto.teacher.*;
 import in.springproject.service.TeacherService;

@@ -1,4 +1,4 @@
-﻿package in.springproject.security;
+package in.springproject.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

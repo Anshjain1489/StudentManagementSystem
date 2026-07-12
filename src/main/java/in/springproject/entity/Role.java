@@ -1,4 +1,4 @@
-﻿package in.springproject.entity;
+package in.springproject.entity;
 
 import in.springproject.entity.enums.RoleName;
 import jakarta.persistence.*;

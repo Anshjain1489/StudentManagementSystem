@@ -1,4 +1,4 @@
-﻿package in.springproject.repository;
+package in.springproject.repository;
 
 import in.springproject.entity.Exam;
 import org.springframework.data.domain.Page;

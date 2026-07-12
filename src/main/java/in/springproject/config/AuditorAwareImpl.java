@@ -1,4 +1,4 @@
-﻿package in.springproject.config;
+package in.springproject.config;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;

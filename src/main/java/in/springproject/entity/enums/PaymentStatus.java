@@ -1,3 +1,3 @@
-﻿package in.springproject.entity.enums;
+package in.springproject.entity.enums;
 
 public enum PaymentStatus { PENDING, COMPLETED, FAILED, REFUNDED }

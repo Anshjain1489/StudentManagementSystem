@@ -1,4 +1,4 @@
-﻿package in.springproject.scheduler;
+package in.springproject.scheduler;
 
 import in.springproject.entity.Fees;
 import in.springproject.repository.FeesRepository;

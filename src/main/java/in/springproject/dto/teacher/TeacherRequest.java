@@ -1,4 +1,4 @@
-﻿package in.springproject.dto.teacher;
+package in.springproject.dto.teacher;
 
 import in.springproject.entity.enums.Gender;
 import jakarta.validation.constraints.*;

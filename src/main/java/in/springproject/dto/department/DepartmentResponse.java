@@ -1,4 +1,4 @@
-﻿package in.springproject.dto.department;
+package in.springproject.dto.department;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

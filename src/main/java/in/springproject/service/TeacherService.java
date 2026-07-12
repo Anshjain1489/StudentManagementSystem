@@ -1,4 +1,4 @@
-﻿package in.springproject.service;
+package in.springproject.service;
 
 import in.springproject.dto.teacher.*;
 import in.springproject.util.PageResponse;

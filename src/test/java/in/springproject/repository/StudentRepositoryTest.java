@@ -1,4 +1,4 @@
-﻿package in.springproject.repository;
+package in.springproject.repository;
 
 import in.springproject.entity.Department;
 import in.springproject.entity.Student;
