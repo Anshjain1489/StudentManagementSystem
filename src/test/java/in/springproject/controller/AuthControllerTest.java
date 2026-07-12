@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * depends on those beans, but does NOT load the full application context.
  */
 @WebMvcTest(AuthController.class)
+@org.springframework.context.annotation.Import(in.springproject.config.SecurityConfig.class)
 @DisplayName("AuthController Integration Tests")
 class AuthControllerTest {
 

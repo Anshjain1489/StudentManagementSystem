@@ -82,7 +82,6 @@ class AuthServiceTest {
         when(jwtTokenProvider.generateAccessToken(any(Authentication.class))).thenReturn("access-token");
         when(jwtTokenProvider.generateRefreshToken(anyString())).thenReturn("refresh-token");
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(testUser));
-        when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());
         when(userRepository.save(any(User.class))).thenReturn(testUser);
 
         JwtResponse response = authService.login(loginRequest);

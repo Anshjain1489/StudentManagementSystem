@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.*;
  */
 @DataJpaTest
 @ActiveProfiles("test")
+@org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase(replace = org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE)
 @Import(StudentRepositoryTest.TestConfig.class)
 @DisplayName("StudentRepository Integration Tests")
 class StudentRepositoryTest {

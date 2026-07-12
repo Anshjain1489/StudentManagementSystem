@@ -34,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * depends on those beans, but does NOT load the full application context.
  */
 @WebMvcTest(StudentController.class)
+@org.springframework.context.annotation.Import(in.springproject.config.SecurityConfig.class)
 @DisplayName("StudentController Integration Tests")
 class StudentControllerTest {
 
