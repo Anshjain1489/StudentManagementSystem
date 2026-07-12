@@ -131,7 +131,12 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiResponse<>(false, "Validation failed", errors, HttpStatus.BAD_REQUEST.value()));
+                .body(ApiResponse.<Map<String, String>>builder()
+                        .success(false)
+                        .message("Validation failed")
+                        .data(errors)
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
+                        .build());
     }
 
     /**

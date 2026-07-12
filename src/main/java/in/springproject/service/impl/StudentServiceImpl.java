@@ -69,7 +69,7 @@ public class StudentServiceImpl implements StudentService {
             .build();
 
         Student saved = studentRepository.save(student);
-        log.info("Created student: {} ({})", saved.getFullName(), saved.getRollNumber());
+        log.info("Created student: {} {} ({})", saved.getFirstName(), saved.getLastName(), saved.getRollNumber());
         return mapToResponse(saved);
     }
 
