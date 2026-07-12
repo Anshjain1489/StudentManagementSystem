@@ -1,13 +1,14 @@
-*.java text working-tree-encoding=UTF-8
-*.xml text
-*.properties text
-*.yml text
-*.yaml text
-*.md text
-*.json text
-*.css text
-*.js text
-*.jsx text
-*.html text
-Dockerfile text
-docker-compose.yml text
+# Text files - normalize line endings to LF in the repository
+*.java text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.html text eol=lf
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf

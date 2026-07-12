@@ -12,6 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verify no UTF-8 BOM in Java sources
+        run: |
+          BOMFILES=$(grep -rl $'\xef\xbb\xbf' src/ 2>/dev/null || true)
+          if [ -n "$BOMFILES" ]; then
+            echo "ERROR: BOM detected in the following files:"
+            echo "$BOMFILES"
+            sed -i '1s/^\xef\xbb\xbf//' $BOMFILES
+            echo "BOM stripped by CI. Files corrected:"
+            echo "$BOMFILES"
+          else
+            echo "No BOM detected in source files."
+          fi
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
