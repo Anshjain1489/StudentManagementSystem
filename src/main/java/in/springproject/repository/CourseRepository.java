@@ -76,6 +76,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
      * @param courseId the course ID
      * @return number of enrolled students
      */
-    @Query("SELECT COUNT(DISTINCT sc.student) FROM Course c JOIN c.students sc WHERE c.id = :courseId")
+    @Query("SELECT COUNT(DISTINCT sc) FROM Course c JOIN c.students sc WHERE c.id = :courseId")
     long countEnrolledStudents(@Param("courseId") Long courseId);
 }

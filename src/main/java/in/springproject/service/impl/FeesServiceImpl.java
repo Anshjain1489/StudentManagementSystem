@@ -121,7 +121,7 @@ public class FeesServiceImpl implements FeesService {
     @Override
     @Transactional(readOnly = true)
     public BigDecimal getTotalCollected() {
-        BigDecimal total = paymentRepository.findTotalCollected();
+        BigDecimal total = paymentRepository.findTotalCollected(PaymentStatus.COMPLETED);
         return total != null ? total : BigDecimal.ZERO;
     }
 

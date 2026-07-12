@@ -172,6 +172,9 @@ public class ExamServiceImpl implements ExamService {
     // ─── Grade/GPA Helpers ─────────────────────────────────────────────────────
 
     private Result buildResult(Student student, Exam exam, Double marks, String remarks) {
+        if (marks == null) throw new IllegalArgumentException("Marks obtained cannot be null");
+        if (exam.getTotalMarks() == null) throw new IllegalArgumentException("Exam total marks cannot be null");
+        if (exam.getPassingMarks() == null) throw new IllegalArgumentException("Exam passing marks cannot be null");
         return Result.builder()
             .student(student).exam(exam)
             .marksObtained(marks)

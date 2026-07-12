@@ -1,6 +1,7 @@
 package in.springproject.service.impl;
 
 import in.springproject.dto.dashboard.DashboardStatsResponse;
+import in.springproject.entity.enums.PaymentStatus;
 import in.springproject.repository.*;
 import in.springproject.service.DashboardService;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public class DashboardServiceImpl implements DashboardService {
         long totalDepts      = departmentRepository.countActive();
         long pendingCount    = feesRepository.countPending();
 
-        BigDecimal collected = paymentRepository.findTotalCollected();
+        BigDecimal collected = paymentRepository.findTotalCollected(PaymentStatus.COMPLETED);
 
         return DashboardStatsResponse.builder()
             .totalStudents(totalStudents)

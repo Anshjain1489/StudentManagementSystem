@@ -1,6 +1,7 @@
 package in.springproject.repository;
 
 import in.springproject.entity.Payment;
+import in.springproject.entity.enums.PaymentStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,19 +53,21 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
      *
      * @return total collected amount as {@link BigDecimal}, or {@code null} if none exist
      */
-    @Query("SELECT SUM(p.amount) FROM Payment p WHERE p.status = 'COMPLETED'")
-    BigDecimal findTotalCollected();
+    @Query("SELECT SUM(p.amount) FROM Payment p WHERE p.status = :status")
+    BigDecimal findTotalCollected(@Param("status") PaymentStatus status);
 
     /**
      * Calculates the total amount collected from completed payments within a date-time window.
      *
-     * @param start the start of the window (inclusive)
-     * @param end   the end of the window (inclusive)
+     * @param start  the start of the window (inclusive)
+     * @param end    the end of the window (inclusive)
+     * @param status the payment status to filter by
      * @return total collected amount within the window, or {@code null} if none exist
      */
-    @Query("SELECT SUM(p.amount) FROM Payment p WHERE p.status = 'COMPLETED' AND p.paymentDate BETWEEN :start AND :end")
+    @Query("SELECT SUM(p.amount) FROM Payment p WHERE p.status = :status AND p.paymentDate BETWEEN :start AND :end")
     BigDecimal findTotalCollectedBetween(@Param("start") LocalDateTime start,
-                                         @Param("end") LocalDateTime end);
+                                         @Param("end") LocalDateTime end,
+                                         @Param("status") PaymentStatus status);
 
     /**
      * Returns a paginated, date-descending list of all non-deleted payments.
