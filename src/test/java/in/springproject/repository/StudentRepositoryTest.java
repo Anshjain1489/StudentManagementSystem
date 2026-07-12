@@ -8,8 +8,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
@@ -17,10 +22,32 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
+/**
+ * Integration tests for StudentRepository using an H2 in-memory database.
+ *
+ * <p>@DataJpaTest does not load the full application context, so it does not
+ * pick up @EnableJpaAuditing from the main class. We supply a minimal
+ * TestConfig that re-enables auditing with a simple stub AuditorAware bean.</p>
+ */
 @DataJpaTest
 @ActiveProfiles("test")
+@Import(StudentRepositoryTest.TestConfig.class)
 @DisplayName("StudentRepository Integration Tests")
 class StudentRepositoryTest {
+
+    /**
+     * Minimal test configuration: enables JPA auditing and provides
+     * a stub {@link AuditorAware} that always returns "test-user".
+     * This prevents NoSuchBeanDefinitionException for "auditorAwareImpl"
+     * when @DataJpaTest loads only the JPA slice.
+     */
+    @EnableJpaAuditing(auditorAwareRef = "testAuditorAware")
+    static class TestConfig {
+        @Bean
+        public AuditorAware<String> testAuditorAware() {
+            return () -> Optional.of("test-user");
+        }
+    }
 
     @Autowired private StudentRepository studentRepository;
     @Autowired private DepartmentRepository departmentRepository;
