@@ -38,6 +38,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final in.springproject.config.DataInitializer dataInitializer;
 
     @Value("${app.frontend-url}")
     private String frontendUrl;
@@ -48,6 +49,13 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public JwtResponse login(LoginRequest request) {
+        // Seed default roles and admin dynamically on first login request
+        try {
+            dataInitializer.run();
+        } catch (Exception e) {
+            log.error("Error during dynamic database seeding: ", e);
+        }
+
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getUsernameOrEmail(), request.getPassword())
         );

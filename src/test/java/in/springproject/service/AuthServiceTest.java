@@ -46,6 +46,7 @@ class AuthServiceTest {
     @Mock private JwtTokenProvider jwtTokenProvider;
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private EmailService emailService;
+    @Mock private in.springproject.config.DataInitializer dataInitializer;
 
     @InjectMocks private AuthServiceImpl authService;
 
