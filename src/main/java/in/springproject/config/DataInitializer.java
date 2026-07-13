@@ -8,7 +8,8 @@ import in.springproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +17,15 @@ import java.util.Set;
 
 /**
  * Bootstraps default roles and admin user on first application startup.
+ * Uses ApplicationReadyEvent so seeding runs AFTER Tomcat has fully bound to
+ * its port (allowing Render/cloud platforms to detect the service as healthy
+ * before the DB round-trips complete).
  * Safe to run repeatedly — uses existence checks before inserting.
  */
 @Component
-@org.springframework.context.annotation.Lazy(false)
 @RequiredArgsConstructor
 @Slf4j
-public class DataInitializer implements CommandLineRunner {
+public class DataInitializer {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
@@ -31,19 +34,43 @@ public class DataInitializer implements CommandLineRunner {
     @Value("${app.admin.email:admin@sms.edu}")
     private String adminEmail;
 
-    @Value("${app.admin.password:Admin@1234}")
+    @Value("${app.admin.password:Admin@123}")
     private String adminPassword;
 
     @Value("${app.admin.firstName:System}")
     private String adminFirstName;
 
-    @Value("${app.admin.lastName:Admin}")
+    @Value("${app.admin.lastName:Administrator}")
     private String adminLastName;
 
-    @Override
-    public void run(String... args) {
-        seedRoles();
-        seedAdminUser();
+    /**
+     * Triggered after the application context is fully refreshed and Tomcat
+     * has bound to its port. Database seeding happens here so the port is
+     * already open when cloud health checks run.
+     */
+    @EventListener(ApplicationReadyEvent.class)
+    public void onApplicationReady() {
+        log.info("Application ready — starting database seeding...");
+        try {
+            seedRoles();
+            seedAdminUser();
+            log.info("Database seeding completed successfully.");
+        } catch (Exception e) {
+            log.error("Database seeding failed (non-fatal): {}", e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Public entry point for on-demand seeding (e.g., called from AuthService on first login).
+     * Idempotent — safe to call multiple times.
+     */
+    public void run() {
+        try {
+            seedRoles();
+            seedAdminUser();
+        } catch (Exception e) {
+            log.error("On-demand seeding error: {}", e.getMessage(), e);
+        }
     }
 
     private void seedRoles() {

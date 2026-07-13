@@ -49,13 +49,6 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public JwtResponse login(LoginRequest request) {
-        // Seed default roles and admin dynamically on first login request
-        try {
-            dataInitializer.run();
-        } catch (Exception e) {
-            log.error("Error during dynamic database seeding: ", e);
-        }
-
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getUsernameOrEmail(), request.getPassword())
         );
