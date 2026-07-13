@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../services/api';
+import api, { getFileUrl } from '../services/api';
 import { useForm } from 'react-hook-form';
 import { Search, UserPlus, Edit2, Trash2, X, Upload } from 'lucide-react';
 
@@ -168,7 +168,7 @@ const Students = () => {
                     <div className="d-flex align-items-center gap-3">
                       <div className="avatar-placeholder rounded-circle bg-secondary d-flex align-items-center justify-content-center text-info fw-bold" style={{ width: '40px', height: '40px' }}>
                         {student.photoUrl ? (
-                          <img src={`http://localhost:8080${student.photoUrl}`} alt="" className="w-100 h-100 rounded-circle object-fit-cover" />
+                          <img src={getFileUrl(student.photoUrl)} alt="" className="w-100 h-100 rounded-circle object-fit-cover" />
                         ) : (
                           student.firstName.charAt(0) + student.lastName.charAt(0)
                         )}

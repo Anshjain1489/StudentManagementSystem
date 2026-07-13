@@ -49,4 +49,12 @@ api.interceptors.response.use(
   }
 );
 
+export const getFileUrl = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  const rootUrl = API_BASE_URL.replace('/api/v1', '');
+  return `${rootUrl}${path}`;
+};
+
 export default api;
+

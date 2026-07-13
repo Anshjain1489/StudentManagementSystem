@@ -1,0 +1,98 @@
+2026-07-14 00:02:15 [main] INFO  i.s.controller.AuthControllerTest - Starting AuthControllerTest using Java 25.0.2 with PID 21932 (started by jaina in D:\Intellij\StudentManagementSystem)
+2026-07-14 00:02:15 [main] DEBUG i.s.controller.AuthControllerTest - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-07-14 00:02:15 [main] INFO  i.s.controller.AuthControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-07-14 00:02:18 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-07-14 00:02:18 [main] DEBUG i.s.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-07-14 00:02:18 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-07-14 00:02:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-07-14 00:02:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2026-07-14 00:02:18 [main] INFO  i.s.controller.AuthControllerTest - Started AuthControllerTest in 3.777 seconds (process running for 5.078)
+2026-07-14 00:02:19 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [in.springproject.controller.StudentControllerTest]: StudentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-14 00:02:19 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration in.springproject.StudentManagementSystemApplication for test class in.springproject.controller.StudentControllerTest
+2026-07-14 00:02:19 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-07-14 00:02:19 [main] INFO  i.s.controller.StudentControllerTest - Starting StudentControllerTest using Java 25.0.2 with PID 21932 (started by jaina in D:\Intellij\StudentManagementSystem)
+2026-07-14 00:02:19 [main] DEBUG i.s.controller.StudentControllerTest - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-07-14 00:02:19 [main] INFO  i.s.controller.StudentControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-07-14 00:02:19 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-07-14 00:02:19 [main] DEBUG i.s.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-07-14 00:02:19 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-07-14 00:02:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-07-14 00:02:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-07-14 00:02:19 [main] INFO  i.s.controller.StudentControllerTest - Started StudentControllerTest in 0.538 seconds (process running for 6.02)
+2026-07-14 00:02:19 [main] ERROR i.s.exception.GlobalExceptionHandler - Resource not found: Student not found with id: '999'
+2026-07-14 00:02:19 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [in.springproject.repository.StudentRepositoryTest]: StudentRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-14 00:02:19 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration in.springproject.StudentManagementSystemApplication for test class in.springproject.repository.StudentRepositoryTest
+2026-07-14 00:02:19 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-07-14 00:02:19 [main] INFO  i.s.repository.StudentRepositoryTest - Starting StudentRepositoryTest using Java 25.0.2 with PID 21932 (started by jaina in D:\Intellij\StudentManagementSystem)
+2026-07-14 00:02:19 [main] DEBUG i.s.repository.StudentRepositoryTest - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-07-14 00:02:19 [main] INFO  i.s.repository.StudentRepositoryTest - The following 1 profile is active: "test"
+2026-07-14 00:02:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-14 00:02:20 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 101 ms. Found 18 JPA repository interfaces.
+2026-07-14 00:02:20 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-14 00:02:20 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-07-14 00:02:20 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-07-14 00:02:20 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-14 00:02:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Starting...
+2026-07-14 00:02:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - SMSHikariPool - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-07-14 00:02:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Start completed.
+2026-07-14 00:02:20 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-14 00:02:22 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-14 00:02:22 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-14 00:02:22 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-14 00:02:23 [main] INFO  i.s.repository.StudentRepositoryTest - Started StudentRepositoryTest in 3.884 seconds (process running for 10.063)
+2026-07-14 00:02:24 [main] INFO  i.s.service.impl.AuthServiceImpl - User logged in: john.doe@test.com
+2026-07-14 00:02:24 [main] INFO  i.s.service.impl.AuthServiceImpl - Password reset email sent to: john.doe@test.com
+2026-07-14 00:02:24 [main] INFO  i.s.service.impl.StudentServiceImpl - Soft deleted student: 1
+2026-07-14 00:02:24 [main] INFO  i.s.service.impl.StudentServiceImpl - Created student: John Doe (CS2024001)
+2026-07-14 00:02:24 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-14 00:02:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Shutdown initiated...
+2026-07-14 00:02:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Shutdown completed.
+2026-07-14 00:34:01 [main] INFO  i.s.controller.AuthControllerTest - Starting AuthControllerTest using Java 25.0.2 with PID 1776 (started by jaina in D:\Intellij\StudentManagementSystem)
+2026-07-14 00:34:01 [main] DEBUG i.s.controller.AuthControllerTest - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-07-14 00:34:01 [main] INFO  i.s.controller.AuthControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-07-14 00:34:04 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-07-14 00:34:04 [main] DEBUG i.s.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-07-14 00:34:04 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-07-14 00:34:04 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-07-14 00:34:04 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2026-07-14 00:34:05 [main] INFO  i.s.controller.AuthControllerTest - Started AuthControllerTest in 4.044 seconds (process running for 5.479)
+2026-07-14 00:34:05 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [in.springproject.controller.StudentControllerTest]: StudentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-14 00:34:05 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration in.springproject.StudentManagementSystemApplication for test class in.springproject.controller.StudentControllerTest
+2026-07-14 00:34:05 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-07-14 00:34:05 [main] INFO  i.s.controller.StudentControllerTest - Starting StudentControllerTest using Java 25.0.2 with PID 1776 (started by jaina in D:\Intellij\StudentManagementSystem)
+2026-07-14 00:34:05 [main] DEBUG i.s.controller.StudentControllerTest - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-07-14 00:34:05 [main] INFO  i.s.controller.StudentControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-07-14 00:34:06 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-07-14 00:34:06 [main] DEBUG i.s.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-07-14 00:34:06 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-07-14 00:34:06 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-07-14 00:34:06 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-07-14 00:34:06 [main] INFO  i.s.controller.StudentControllerTest - Started StudentControllerTest in 0.699 seconds (process running for 6.673)
+2026-07-14 00:34:06 [main] ERROR i.s.exception.GlobalExceptionHandler - Resource not found: Student not found with id: '999'
+2026-07-14 00:34:06 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [in.springproject.repository.StudentRepositoryTest]: StudentRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-14 00:34:06 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration in.springproject.StudentManagementSystemApplication for test class in.springproject.repository.StudentRepositoryTest
+2026-07-14 00:34:06 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-07-14 00:34:06 [main] INFO  i.s.repository.StudentRepositoryTest - Starting StudentRepositoryTest using Java 25.0.2 with PID 1776 (started by jaina in D:\Intellij\StudentManagementSystem)
+2026-07-14 00:34:06 [main] DEBUG i.s.repository.StudentRepositoryTest - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-07-14 00:34:06 [main] INFO  i.s.repository.StudentRepositoryTest - The following 1 profile is active: "test"
+2026-07-14 00:34:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-14 00:34:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 113 ms. Found 18 JPA repository interfaces.
+2026-07-14 00:34:07 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-14 00:34:07 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-07-14 00:34:07 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-07-14 00:34:07 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-14 00:34:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Starting...
+2026-07-14 00:34:07 [main] INFO  com.zaxxer.hikari.pool.HikariPool - SMSHikariPool - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-07-14 00:34:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Start completed.
+2026-07-14 00:34:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-14 00:34:09 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-14 00:34:09 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-14 00:34:09 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-14 00:34:10 [main] INFO  i.s.repository.StudentRepositoryTest - Started StudentRepositoryTest in 4.364 seconds (process running for 11.22)
+2026-07-14 00:34:11 [main] INFO  i.s.service.impl.AuthServiceImpl - User logged in: john.doe@test.com
+2026-07-14 00:34:11 [main] INFO  i.s.service.impl.AuthServiceImpl - Password reset email sent to: john.doe@test.com
+2026-07-14 00:34:12 [main] INFO  i.s.service.impl.StudentServiceImpl - Soft deleted student: 1
+2026-07-14 00:34:12 [main] INFO  i.s.service.impl.StudentServiceImpl - Created student: John Doe (CS2024001)
+2026-07-14 00:34:12 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-14 00:34:12 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Shutdown initiated...
+2026-07-14 00:34:12 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SMSHikariPool - Shutdown completed.

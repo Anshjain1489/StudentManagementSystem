@@ -38,6 +38,7 @@ public class DataInitializer {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final in.springproject.repository.DepartmentRepository departmentRepository;
 
     @Value("${app.admin.email:admin@sms.edu}")
     private String adminEmail;
@@ -59,9 +60,40 @@ public class DataInitializer {
         try {
             seedRoles();
             seedAdminUser();
+            seedDepartments();
             log.info("Database seeding completed.");
         } catch (Exception e) {
             log.error("Database seeding failed (non-fatal): {}", e.getMessage(), e);
+        }
+    }
+
+    private void seedDepartments() {
+        if (departmentRepository.countActive() == 0) {
+            departmentRepository.save(
+                in.springproject.entity.Department.builder()
+                    .name("Computer Science & Engineering")
+                    .code("CSE")
+                    .description("Department of Computer Science and Engineering")
+                    .establishedYear(2020)
+                    .build()
+            );
+            departmentRepository.save(
+                in.springproject.entity.Department.builder()
+                    .name("Electronics & Communication Engineering")
+                    .code("ECE")
+                    .description("Department of Electronics and Communication Engineering")
+                    .establishedYear(2020)
+                    .build()
+            );
+            departmentRepository.save(
+                in.springproject.entity.Department.builder()
+                    .name("Mechanical Engineering")
+                    .code("ME")
+                    .description("Department of Mechanical Engineering")
+                    .establishedYear(2021)
+                    .build()
+            );
+            log.info("Seeded default departments: CSE, ECE, ME");
         }
     }
 
