@@ -8,8 +8,6 @@ import in.springproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +15,20 @@ import java.util.Set;
 
 /**
  * Bootstraps default roles and admin user on first application startup.
- * Uses ApplicationReadyEvent so seeding runs AFTER Tomcat has fully bound to
- * its port (allowing Render/cloud platforms to detect the service as healthy
- * before the DB round-trips complete).
- * Safe to run repeatedly — uses existence checks before inserting.
+ *
+ * <p>This is intentionally NOT a {@code CommandLineRunner} and NOT an
+ * {@code ApplicationReadyEvent} listener.  Both of those hooks run on the
+ * main startup thread and would force HikariCP + Hibernate to initialise
+ * eagerly — adding ~170 s to startup on Render (US→Singapore Supabase
+ * round-trips) and causing the port-binding scanner to miss the open port.
+ *
+ * <p>Instead, {@link #run()} is called lazily from
+ * {@code AuthServiceImpl.login()} on the very first login request.  By that
+ * time Tomcat is already listening on its port (Render has detected the
+ * service as healthy), so the slow DB round-trips happen in the background
+ * of a live service.
+ *
+ * <p>Safe to call multiple times — all inserts are guarded by existence checks.
  */
 @Component
 @RequiredArgsConstructor
@@ -44,32 +52,16 @@ public class DataInitializer {
     private String adminLastName;
 
     /**
-     * Triggered after the application context is fully refreshed and Tomcat
-     * has bound to its port. Database seeding happens here so the port is
-     * already open when cloud health checks run.
-     */
-    @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReady() {
-        log.info("Application ready — starting database seeding...");
-        try {
-            seedRoles();
-            seedAdminUser();
-            log.info("Database seeding completed successfully.");
-        } catch (Exception e) {
-            log.error("Database seeding failed (non-fatal): {}", e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Public entry point for on-demand seeding (e.g., called from AuthService on first login).
+     * Seeds roles and the default admin user if they do not already exist.
      * Idempotent — safe to call multiple times.
      */
     public void run() {
         try {
             seedRoles();
             seedAdminUser();
+            log.info("Database seeding completed.");
         } catch (Exception e) {
-            log.error("On-demand seeding error: {}", e.getMessage(), e);
+            log.error("Database seeding failed (non-fatal): {}", e.getMessage(), e);
         }
     }
 

@@ -46,9 +46,15 @@ public class AuthServiceImpl implements AuthService {
     /**
      * {@inheritDoc}
      * <p>Authenticates via Spring Security, generates JWT tokens, and persists the refresh token.</p>
+     * <p>On the very first call, {@code dataInitializer.run()} seeds roles and the default admin
+     * user.  This happens lazily (after Tomcat has bound its port) so that startup is fast enough
+     * for Render's port-binding scanner to detect the service as healthy.</p>
      */
     @Override
     public JwtResponse login(LoginRequest request) {
+        // Seed default roles + admin on first login (lazy DB init — keeps startup fast)
+        dataInitializer.run();
+
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getUsernameOrEmail(), request.getPassword())
         );
