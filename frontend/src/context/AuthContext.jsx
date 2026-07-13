@@ -34,7 +34,9 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: res.message || 'Login failed' };
     } catch (err) {
-      return { success: false, message: err.message || 'Invalid credentials' };
+      // err may be: {message:"..."}, {error:"..."}, a string, or null
+      const message = err?.message || err?.error || (typeof err === 'string' ? err : null) || 'Login failed. Please try again.';
+      return { success: false, message };
     }
   };
 
