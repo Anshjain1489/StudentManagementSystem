@@ -47,9 +47,6 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService userDetailsService;
 
-    @Value("${app.cors.allowed-origins}")
-    private String allowedOrigins;
-
     /**
      * Public endpoints that do not require authentication.
      * Swagger UI, actuator health, and file uploads are freely accessible.
@@ -103,23 +100,16 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Explicit origins from env var / properties
-        List<String> origins = Arrays.asList(allowedOrigins.split(","));
-        configuration.setAllowedOrigins(origins);
-
-        // Also allow all Vercel preview deployment URLs via pattern
-        configuration.setAllowedOriginPatterns(List.of(
-            "https://*.vercel.app",
-            "http://localhost:*"
-        ));
+        // Use patterns only (mixing setAllowedOrigins + setAllowedOriginPatterns causes conflicts).
+        // Pattern "*" with allowCredentials=true echoes the request's Origin header back —
+        // this is spec-compliant and works correctly for all browsers.
+        configuration.setAllowedOriginPatterns(List.of("*"));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-
-        // Must be explicit (not wildcard) when allowCredentials=true
         configuration.setAllowedHeaders(Arrays.asList(
-            "Authorization", "Content-Type", "Accept",
-            "X-Requested-With", "Origin", "Access-Control-Request-Method",
-            "Access-Control-Request-Headers"
+                "Authorization", "Content-Type", "Accept",
+                "X-Requested-With", "Origin",
+                "Access-Control-Request-Method", "Access-Control-Request-Headers"
         ));
         configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowCredentials(true);
@@ -129,6 +119,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
     /**
      * DaoAuthenticationProvider wired with the custom UserDetailsService
