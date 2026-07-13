@@ -39,6 +39,10 @@ public class DataInitializer {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final in.springproject.repository.DepartmentRepository departmentRepository;
+    private final in.springproject.repository.SemesterRepository semesterRepository;
+    private final in.springproject.repository.ClassroomRepository classroomRepository;
+    private final in.springproject.repository.CourseRepository courseRepository;
+    private final in.springproject.repository.ExamRepository examRepository;
 
     @Value("${app.admin.email:admin@sms.edu}")
     private String adminEmail;
@@ -61,13 +65,121 @@ public class DataInitializer {
             seedRoles();
             seedAdminUser();
             seedDepartments();
+            seedSemesters();
+            seedClassrooms();
+            seedCourses();
+            seedExams();
             log.info("Database seeding completed.");
         } catch (Exception e) {
             log.error("Database seeding failed (non-fatal): {}", e.getMessage(), e);
         }
     }
 
+    private void seedSemesters() {
+        if (semesterRepository.count() == 0) {
+            semesterRepository.save(
+                in.springproject.entity.Semester.builder()
+                    .name("Fall 2026")
+                    .startDate(java.time.LocalDate.of(2026, 8, 1))
+                    .endDate(java.time.LocalDate.of(2026, 12, 15))
+                    .isActive(true)
+                    .academicYear("2026-2027")
+                    .build()
+            );
+            log.info("Seeded default semester");
+        }
+    }
+
+    private void seedClassrooms() {
+        if (classroomRepository.count() == 0) {
+            classroomRepository.save(
+                in.springproject.entity.Classroom.builder()
+                    .roomNumber("Room 301")
+                    .building("Science Block")
+                    .floor(3)
+                    .capacity(60)
+                    .hasProjector(true)
+                    .hasAc(true)
+                    .isAvailable(true)
+                    .build()
+            );
+            log.info("Seeded default classroom");
+        }
+    }
+
+    private void seedCourses() {
+        if (courseRepository.countActive() == 0) {
+            in.springproject.entity.Department cse = departmentRepository.findByCode("CSE").orElse(null);
+            if (cse != null) {
+                courseRepository.save(
+                    in.springproject.entity.Course.builder()
+                        .name("Introduction to Computer Programming")
+                        .code("CS101")
+                        .description("Learn programming concepts using Java")
+                        .credits(4)
+                        .maxStudents(100)
+                        .isActive(true)
+                        .department(cse)
+                        .build()
+                );
+                courseRepository.save(
+                    in.springproject.entity.Course.builder()
+                        .name("Database Management Systems")
+                        .code("CS302")
+                        .description("Fundamentals of relational databases and SQL")
+                        .credits(4)
+                        .maxStudents(80)
+                        .isActive(true)
+                        .department(cse)
+                        .build()
+                );
+                log.info("Seeded default courses");
+            }
+        }
+    }
+
+    private void seedExams() {
+        if (examRepository.count() == 0) {
+            in.springproject.entity.Course course = courseRepository.findByCode("CS101").orElse(null);
+            in.springproject.entity.Semester semester = semesterRepository.findAll().stream().findFirst().orElse(null);
+            in.springproject.entity.Classroom classroom = classroomRepository.findAll().stream().findFirst().orElse(null);
+
+            if (course != null) {
+                examRepository.save(
+                    in.springproject.entity.Exam.builder()
+                        .name("Midterm Exam - CS101")
+                        .examDate(java.time.LocalDate.of(2026, 10, 15))
+                        .startTime(java.time.LocalTime.of(10, 0))
+                        .endTime(java.time.LocalTime.of(12, 0))
+                        .totalMarks(100)
+                        .passingMarks(40)
+                        .description("Midterm examination covering first half of CS101")
+                        .course(course)
+                        .semester(semester)
+                        .classroom(classroom)
+                        .build()
+                );
+                examRepository.save(
+                    in.springproject.entity.Exam.builder()
+                        .name("End Semester Exam - CS101")
+                        .examDate(java.time.LocalDate.of(2026, 12, 10))
+                        .startTime(java.time.LocalTime.of(14, 0))
+                        .endTime(java.time.LocalTime.of(17, 0))
+                        .totalMarks(100)
+                        .passingMarks(40)
+                        .description("Final comprehensive examination of CS101")
+                        .course(course)
+                        .semester(semester)
+                        .classroom(classroom)
+                        .build()
+                );
+                log.info("Seeded default exams");
+            }
+        }
+    }
+
     private void seedDepartments() {
+
         if (departmentRepository.countActive() == 0) {
             departmentRepository.save(
                 in.springproject.entity.Department.builder()
