@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://studentmanagementsystem-eqgk.onrender.com/api/v1';
+let API_BASE_URL = import.meta.env.VITE_API_URL || 'https://studentmanagementsystem-eqgk.onrender.com/api/v1';
+
+// Ensure the URL doesn't have a trailing slash and ends with /api/v1
+API_BASE_URL = API_BASE_URL.replace(/\/$/, '');
+if (!API_BASE_URL.endsWith('/api/v1')) {
+  API_BASE_URL = `${API_BASE_URL}/api/v1`;
+}
 
 const api = axios.create({
   baseURL: API_BASE_URL,
