@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Sparkles, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Sparkles, AlertCircle, Eye, EyeOff, RefreshCw } from 'lucide-react';
 
 const Login = () => {
   const { login } = useAuth();
@@ -12,15 +12,40 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [warmingUp, setWarmingUp] = useState(false);
+  const [retryCountdown, setRetryCountdown] = useState(0);
+  const countdownRef = useRef(null);
+  const formDataRef = useRef(null);
+
+  // Auto-retry countdown when server is warming up
+  useEffect(() => {
+    if (retryCountdown > 0) {
+      countdownRef.current = setTimeout(() => setRetryCountdown(c => c - 1), 1000);
+    } else if (retryCountdown === 0 && warmingUp) {
+      // Auto-retry when countdown finishes
+      setWarmingUp(false);
+      if (formDataRef.current) {
+        onSubmit(formDataRef.current);
+      }
+    }
+    return () => clearTimeout(countdownRef.current);
+  }, [retryCountdown, warmingUp]);
 
   const onSubmit = async (data) => {
+    formDataRef.current = data;
     setLoading(true);
     setErrorMsg('');
+    setWarmingUp(false);
     const res = await login(data.usernameOrEmail, data.password);
     setLoading(false);
-    
+
     if (res.success) {
       navigate('/');
+    } else if (res.message && res.message.includes('warming up')) {
+      // Server cold start — auto-retry after 30 seconds
+      setWarmingUp(true);
+      setRetryCountdown(30);
+      setErrorMsg('');
     } else {
       setErrorMsg(res.message);
     }
@@ -46,6 +71,18 @@ const Login = () => {
           </div>
         )}
 
+        {/* Server warming up banner */}
+        {warmingUp && (
+          <div className="alert d-flex align-items-center gap-2 small mb-3" role="alert"
+            style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.4)', color: '#93c5fd', borderRadius: '10px' }}>
+            <RefreshCw size={16} className="flex-shrink-0" style={{ animation: 'spin 1s linear infinite' }} />
+            <span>
+              <strong>Server is waking up</strong> (free tier cold start).<br />
+              Auto-retrying in <strong>{retryCountdown}s</strong>…
+            </span>
+          </div>
+        )}
+
         {errorMsg && (
           <div className="alert alert-danger d-flex align-items-center gap-2 small" role="alert">
             <AlertCircle size={16} />
@@ -56,8 +93,8 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label text-secondary small fw-medium">Username or Email</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder="e.g. admin@sms.edu"
               className={`form-control form-glass ${errors.usernameOrEmail ? 'is-invalid' : ''}`}
               {...register('usernameOrEmail', { required: 'Username or email is required' })}
@@ -70,13 +107,13 @@ const Login = () => {
           <div className="mb-4">
             <label className="form-label text-secondary small fw-medium">Password</label>
             <div className="position-relative">
-              <input 
-                type={showPassword ? 'text' : 'password'} 
+              <input
+                type={showPassword ? 'text' : 'password'}
                 placeholder="••••••••"
                 className={`form-control form-glass pe-5 ${errors.password ? 'is-invalid' : ''}`}
                 {...register('password', { required: 'Password is required' })}
               />
-              <button 
+              <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="position-absolute end-0 top-50 translate-middle-y btn btn-link text-secondary pe-3 py-0"
@@ -89,12 +126,16 @@ const Login = () => {
             )}
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="btn-premium-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2"
-            disabled={loading}
+            disabled={loading || warmingUp}
           >
-            {loading ? 'Logging in...' : 'Access Portal'}
+            {loading
+              ? <><RefreshCw size={16} style={{ animation: 'spin 1s linear infinite' }} /> Logging in…</>
+              : warmingUp
+              ? `Retrying in ${retryCountdown}s…`
+              : 'Access Portal'}
           </button>
         </form>
 

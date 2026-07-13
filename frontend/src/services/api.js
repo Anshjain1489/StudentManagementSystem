@@ -4,6 +4,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/
 
 const api = axios.create({
   baseURL: API_BASE_URL,
+  timeout: 30000, // 30 second timeout — prevents infinite "Logging in..." on cold start
   headers: {
     'Content-Type': 'application/json',
   },
@@ -35,7 +36,10 @@ api.interceptors.response.use(
       }
       return Promise.reject(error.response.data || { message: 'Something went wrong' });
     }
-    return Promise.reject({ message: 'Server is unreachable' });
+    if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+      return Promise.reject({ message: 'Server is warming up. Please wait 30 seconds and try again.' });
+    }
+    return Promise.reject({ message: 'Server is unreachable. Please try again.' });
   }
 );
 
