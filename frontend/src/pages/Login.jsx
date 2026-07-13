@@ -17,19 +17,18 @@ const Login = () => {
   const countdownRef = useRef(null);
   const formDataRef = useRef(null);
 
-  // Auto-retry countdown when server is warming up
+  // Auto-retry countdown when server is warming up (Render free tier cold start)
   useEffect(() => {
     if (retryCountdown > 0) {
       countdownRef.current = setTimeout(() => setRetryCountdown(c => c - 1), 1000);
     } else if (retryCountdown === 0 && warmingUp) {
-      // Auto-retry when countdown finishes
       setWarmingUp(false);
-      if (formDataRef.current) {
-        onSubmit(formDataRef.current);
-      }
+      if (formDataRef.current) onSubmit(formDataRef.current);
     }
     return () => clearTimeout(countdownRef.current);
   }, [retryCountdown, warmingUp]);
+
+  const formatCountdown = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
   const onSubmit = async (data) => {
     formDataRef.current = data;
@@ -41,10 +40,10 @@ const Login = () => {
 
     if (res.success) {
       navigate('/');
-    } else if (res.message && res.message.includes('warming up')) {
-      // Server cold start — auto-retry after 30 seconds
+    } else if (res.message && (res.message.includes('warming up') || res.message.includes('unreachable'))) {
+      // Render free tier cold start — show countdown and auto-retry
       setWarmingUp(true);
-      setRetryCountdown(30);
+      setRetryCountdown(170); // Render takes ~170s to cold-start
       setErrorMsg('');
     } else {
       setErrorMsg(res.message);
@@ -76,10 +75,11 @@ const Login = () => {
           <div className="alert d-flex align-items-center gap-2 small mb-3" role="alert"
             style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.4)', color: '#93c5fd', borderRadius: '10px' }}>
             <RefreshCw size={16} className="flex-shrink-0" style={{ animation: 'spin 1s linear infinite' }} />
-            <span>
-              <strong>Server is waking up</strong> (free tier cold start).<br />
-              Auto-retrying in <strong>{retryCountdown}s</strong>…
-            </span>
+            <div>
+              <strong>Server is starting up</strong> (Render free tier cold start)<br />
+              <span className="opacity-75">This takes ~3 minutes on first access. Auto-retrying in </span>
+              <strong>{formatCountdown(retryCountdown)}</strong><span className="opacity-75">…</span>
+            </div>
           </div>
         )}
 
@@ -132,9 +132,8 @@ const Login = () => {
             disabled={loading || warmingUp}
           >
             {loading
-              ? <><RefreshCw size={16} style={{ animation: 'spin 1s linear infinite' }} /> Logging in…</>
-              : warmingUp
-              ? `Retrying in ${retryCountdown}s…`
+              ? <><RefreshCw size={16} style={{ animation: 'spin 1s linear infinite' }} /> Logging in… (may take 2-3 min on cold start)</>              : warmingUp
+              ? `Auto-retrying in ${formatCountdown(retryCountdown)}…`
               : 'Access Portal'}
           </button>
         </form>
