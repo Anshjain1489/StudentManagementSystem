@@ -99,7 +99,7 @@ const Login = () => {
         </form>
 
         <div className="text-center mt-4">
-          <small className="text-secondary">Default Admin: admin@sms.edu / Admin@1234</small>
+          <small className="text-secondary">Default Admin: admin@sms.edu / Admin@123</small>
         </div>
       </div>
     </div>
