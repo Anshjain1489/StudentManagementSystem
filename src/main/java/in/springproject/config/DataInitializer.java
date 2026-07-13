@@ -19,6 +19,7 @@ import java.util.Set;
  * Safe to run repeatedly — uses existence checks before inserting.
  */
 @Component
+@org.springframework.context.annotation.Lazy(false)
 @RequiredArgsConstructor
 @Slf4j
 public class DataInitializer implements CommandLineRunner {
